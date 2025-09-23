@@ -1,0 +1,87 @@
+/* style.css - custom overrides */
+
+/* General body styling */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navbar brand */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+/* Hero section */
+section.bg-light {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 80px 20px;
+    text-align: center;
+}
+
+section h1 {
+    color: #222;
+    margin-bottom: 15px;
+    font-size: 2.5rem;
+}
+
+section p.lead {
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    font-size: 1.1rem;
+}
+
+/* Button hover */
+.btn-primary {
+    background-color: #0d6efd;
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+    font-size: 0.9rem;
+}
+
+/* -----------------------------
+   Responsive Styles
+-------------------------------- */
+
+/* Tablets (landscape & portrait) */
+@media (max-width: 992px) {
+    section h1 {
+        font-size: 2rem;
+    }
+    section p.lead {
+        font-size: 1rem;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 576px) {
+    section {
+        padding: 60px 15px;
+    }
+    section h1 {
+        font-size: 1.6rem;
+    }
+    section p.lead {
+        font-size: 0.95rem;
+    }
+    .btn-lg {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+}

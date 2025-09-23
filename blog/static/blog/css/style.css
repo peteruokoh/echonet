@@ -1,0 +1,106 @@
+/* General Layout */
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+/* Page Title */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #333;
+}
+
+/* Post Card */
+.post-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-3px);
+}
+
+.post-card h2 {
+    margin: 0 0 10px;
+    font-size: 1.5rem;
+    color: #222;
+}
+
+.post-card p {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.5;
+}
+
+/* Post Media */
+.post-media img,
+.post-media video {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+/* Footer Section */
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Likes */
+.likes {
+    font-size: 1rem;
+    color: #e63946;
+    display: flex;
+    align-items: center;
+}
+
+.likes i {
+    margin-right: 5px;
+}
+
+/* Actions */
+.actions a {
+    margin-left: 10px;
+    color: #333;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.2s;
+}
+
+.actions a:hover {
+    color: #007bff;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .post-card {
+        padding: 15px;
+    }
+
+    .post-card h2 {
+        font-size: 1.2rem;
+    }
+
+    .post-card p {
+        font-size: 0.95rem;
+    }
+}

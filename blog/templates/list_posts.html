@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Posts</title>
+    <link rel="stylesheet" href="{% static '../static/blog/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+            <div>
+                <a data-analytics="" data-cta=""  href="{% url 'homepage' %}"><b>Home Page</b></a>&nbsp;
+                <a data-analytics="" data-cta=""  href="{% url 'create_post' %}"><b>New Post</b></a>
+            </div>
+
+            {% if request.user.is_authenticated %}
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span>Welcome, {{ request.user }}</span>
+                    <form method="post" action="{% url 'logout' %}" style="margin: 0;">
+                        {% csrf_token %}
+                        <button data-analytics="" data-cta=""  type="submit" style="width: 65px; height: 25px;background-color: blue;border-style: none;border-radius: 10%;color: white;cursor: pointer;padding: 0;"><b>Logout</b></button>
+                    </form>
+                </div>
+            {% else %}
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <form method="post" action="{% url 'login' %}" style="margin: 0;">
+                        {% csrf_token %}
+                        <button data-analytics="" data-cta=""  type="submit" style="width: 65px; height: 25px;background-color: blue;border-style: none;border-radius: 10%;color: white;cursor: pointer;padding: 0;"><b>Login</b></button>
+                    </form>
+                    <button data-analytics="" data-cta="" onclick="location.href='{% url 'register_user' %}'" style="width: 65px; height: 25px;background-color: blue;border-style: none;border-radius: 10%; color: white;cursor: pointer;padding: 0;"><b>Sign Up</b></button>
+                </div>
+            {% endif %}
+        </div>
+
+        <h1>Echonet Blog Posts</h1>
+        {% for post in posts %}
+            <div class="post-card">
+                <h2><a data-analytics="" data-cta=""  href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h2>
+                <p>{{ post.body|truncatechars:150 }}</p>
+                
+                <div class="post-media">
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="Post Image">
+                    {% endif %}
+                    {% if post.video %}
+                        <video controls>
+                            <source src="{{ post.video.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    {% endif %}
+                </div>
+
+                <div class="post-footer">
+                    <span class="likes">Likes: {{ post.total_likes }}</span>
+                    <div class="actions">
+                        <a data-analytics="" data-cta="" href="{% url 'edit_post' id=post.id %}"><i class="fa-solid fa-pen-to-square" title="Edit Post"></i></a>
+                        <a data-analytics="" data-cta="" href="{% url 'delete_post' post.id %}"><i class="fa-solid fa-trash" title="Delete Post"></i></a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No posts available.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

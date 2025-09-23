@@ -1,0 +1,15 @@
+{% extends 'homepage.html' %}
+
+{% block content %}
+    <a data-analytics="" data-cta=""  href="{% url 'list_posts' %}"><b>Back To All Posts</b></a>
+    <br>
+    <br>
+    <h6 style="color: red;">You need to login to create, edit, delete, comment on or like a post </h6>
+    <h1 class="page-title">Account Login</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button data-analytics="" data-cta=""  type="submit">Login</button>
+    </form>
+{% endblock %}

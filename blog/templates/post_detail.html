@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <h3><a data-analytics="" data-cta="" href="{% url 'list_posts' %}"><b>Back To All Posts</b></a></h3>
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.body }}</p>
+    {% if post.image %}<img src="{{ post.image.url }}" width="400">{% endif %}
+    {% if post.video %}<video width="400" controls><source src="{{ post.video.url }}"></video>{% endif %}
+
+    <p>Likes: {{ total_likes }}</p>
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'toggle_like' post.id %}">
+            {% csrf_token %}
+            <button data-analytics="" data-cta=""  type="submit">{% if is_liked %}<i class="fa-solid fa-dumpster-fire"></i>Unlike{% else %}<i class="fa-solid fa-heart-circle-exclamation"></i>Like{% endif %}</button>
+        </form>
+    {% endif %}
+
+    <h3>Comments</h3>
+    {% for comment in comments %}
+        <p><b>{{ comment.user.username }}:</b> {{ comment.body }}</p>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <button data-analytics="" data-cta=""  type="submit"><i class="fa-solid fa-comment"></i>Add Comment</button>
+        </form>
+    {% else %}
+        <p style="color: red;"><b>You must be logged in to comment on or like a post.</b></p>
+    {% endif %}
+</body>
+</html>
