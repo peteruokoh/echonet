@@ -34,6 +34,7 @@ def post_detail(request, id):
         "comment_form": comment_form,
         "is_liked": is_liked,
         "total_likes": post.total_likes(),
+        "total_comments": post.total_comments(),
     })
 
 @login_required
@@ -45,7 +46,6 @@ def create_post(request):
             post.author = request.user
             post.publishDate = datetime.today()
             post.save()
-            # return redirect("post_detail", id=post.id)
             return redirect("list_posts")
     else:
         form = PostForm()
@@ -54,9 +54,14 @@ def create_post(request):
 @login_required
 def edit_post(request, id):
     post = get_object_or_404(Post, id=id)
-    if request.user != post.author:
-        return HttpResponseForbidden("You are not allowed to edit this post because you are not the author.")
 
+    # If user is not the author, don't allow edit
+    if request.user != post.author:
+        return render(request, "edit_post_error.html", {
+            "post": post
+        })
+
+    # Only the author reaches here
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
@@ -69,10 +74,18 @@ def edit_post(request, id):
 @login_required
 def delete_post(request, id):
     post = get_object_or_404(Post, id=id)
+    
+    # If user is not the author, don't allow delete
     if request.user != post.author:
-        return HttpResponseForbidden("You are not allowed to delete this post because you are not the author.")
-    post.delete()
-    return redirect("list_posts")
+        return render(request, "delete_post_error.html", {
+            "post": post
+        })
+    
+    # Only the author reaches here
+    if request.method == "POST":
+        post.delete()
+        return redirect("list_posts")
+    return render(request, "confirm_post_delete.html", {"post": post})
 
 @login_required
 def toggle_like(request, id):

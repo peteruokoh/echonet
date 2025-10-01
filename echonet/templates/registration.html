@@ -1,47 +1,92 @@
 {% extends 'homepage.html'%}
+{% load widget_tweaks %}
+
+{% block extra-links %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
 
 {% block content %}
-    <a data-analytics="" data-cta=""  href="{% url 'list_posts' %}"><b>Back To All Posts</b></a>
-    <br>
-    <br>
-    <h1>Sign Up</h1>
-    <form method="post">
-        {% csrf_token %}
+<div class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-6 col-lg-4">
 
-        <!-- Display form errors -->
-        {% if form.errors %}
-            <ul>
+        <!-- Back link -->
+        <a data-analytics="" data-cta=""  href="{% url 'list_posts' %}" class="btn btn-link p-0 mb-3">
+          <i class="fa-solid fa-arrow-left"></i> Back To All Posts
+        </a>
+
+        <!-- Info message -->
+        <h6 class="text-danger mb-3">
+          You need to login to create, edit, delete, like or comment on a post
+        </h6>
+
+        <!-- Page title -->
+        <h1 class="page-title mb-4 text-center">Sign Up</h1>
+
+        <!-- Sign Up Form -->
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          <!-- Display form errors -->
+          {% if form.errors %}
+            <div class="alert alert-danger">
+              <ul class="mb-0">
                 {% for field in form %}
-                    {% for error in field.errors %}
-                        <li style="color: red;"><strong>{{ field.label }}:</strong> {{ error }}</li>
-                    {% endfor %}
+                  {% for error in field.errors %}
+                    <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+                  {% endfor %}
                 {% endfor %}
                 {% for error in form.non_field_errors %}
-                    <li style="color: red;">{{ error }}</li>
+                  <li>{{ error }}</li>
                 {% endfor %}
-            </ul>
-        {% endif %}
+              </ul>
+            </div>
+          {% endif %}
 
-        <label for="id_username">Username:</label>
-        <input type="text" name="username" value="{{ form.username.value|default_if_none:'' }}" required style="margin-left: 10px; margin-bottom: 10px;">
-        <br>
+          <!-- Username -->
+          <div class="mb-3">
+            {{ form.username.label_tag }}
+            {{ form.username|add_class:"form-control"|attr:"placeholder:Enter username" }}
+          </div>
 
-        <label for="id_email">Email:</label>
-        <input type="email" name="email" value="{{ form.email.value|default_if_none:'' }}" required style="margin-left: 40px; margin-bottom: 10px;">
-        <br>
+          <!-- Email -->
+          <div class="mb-3">
+            {{ form.email.label_tag }}
+            {{ form.email|add_class:"form-control"|attr:"placeholder:Enter email" }}
+          </div>
 
-        <label for="id_password1">Password:</label>
-        <input type="password" name="password1" required style="margin-left: 10px; margin-bottom: 10px;">
-        <br>
+          <!-- Password -->
+          <div class="mb-3">
+            {{ form.password1.label_tag }}
+            {{ form.password1|add_class:"form-control"|attr:"placeholder:Enter password" }}
+          </div>
 
-        <label for="id_password2">Confirm Password:</label>
-        <input type="password" name="password2" required style="margin-left: 10px; margin-bottom: 20px;">
-        <br>
+          <!-- Confirm Password -->
+          <div class="mb-4">
+            {{ form.password2.label_tag }}
+            {{ form.password2|add_class:"form-control"|attr:"placeholder:Confirm password" }}
+          </div>
 
-        <button data-analytics="" data-cta=""  type="submit">Sign Up</button>
-    </form>
+          <!-- Submit -->
+          <button data-analytics="" data-cta=""  type="submit" class="btn btn-primary d-block mx-auto">
+            Sign Up
+          </button>
+        </form>
 
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
+
+
+
+
+
+
+
+
 
 
 

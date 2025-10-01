@@ -1,0 +1,41 @@
+{% extends "homepage.html" %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+
+      <!-- Confirmation Card -->
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+
+          <!-- Title -->
+          <h2 class="card-title mb-4">Delete Post</h2>
+
+          <!-- Warning -->
+          <p class="text-danger">
+            Are you sure you want to delete this post?
+          </p>
+
+          <!-- Post Preview -->
+          <div class="border rounded p-3 mb-4 bg-light">
+            <h5>{{ post.title }}</h5>
+            <p class="mb-0 text-muted">{{ post.body|truncatewords:20 }}</p>
+          </div>
+
+          <!-- Action Buttons -->
+          <form method="post">
+            {% csrf_token %}
+            <button data-analytics="" data-cta=""  type="submit" class="btn btn-danger">
+              Yes, Delete
+            </button>
+            <a data-analytics="" data-cta="" href="{% url 'list_posts' %}#post-{{ post.id }}" class="btn btn-secondary ms-2">
+              Cancel
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,7 +1,7 @@
 /* General Layout */
 body {
     font-family: Arial, sans-serif;
-    background: #f8f9fa;
+    background: white;
     margin: 0;
     padding: 20px;
 }
@@ -21,7 +21,7 @@ h1 {
 
 /* Post Card */
 .post-card {
-    background: white;
+    background: #f8f9fa;
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 20px;
@@ -62,16 +62,16 @@ h1 {
 }
 
 /* Likes */
-.likes {
+/* .likes {
     font-size: 1rem;
     color: #e63946;
     display: flex;
     align-items: center;
-}
+} */
 
-.likes i {
+/* .likes i {
     margin-right: 5px;
-}
+} */
 
 /* Actions */
 .actions a {

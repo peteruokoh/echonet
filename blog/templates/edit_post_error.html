@@ -1,0 +1,21 @@
+{% extends 'homepage.html' %}
+
+{% block extra-links %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+
+{% block content %}
+    <div class="alert alert-danger text-center mt-3">
+        <h2>Unauthorized Action</h2>
+        You are not allowed to edit this post because you are not the author.
+    </div>
+
+    <div class="text-center mt-3">
+        <!-- <a data-analytics="" data-cta=""  href="{% url 'list_posts' %}" class="btn btn-primary">
+            OK
+        </a> -->
+        <a data-analytics="" data-cta=""  href="{% url 'list_posts' %}#post-{{ post.id }}" class="btn btn-link p-0 mb-3">
+          <i class="fa-solid fa-arrow-left"></i> Back To All Posts
+        </a>
+    </div>
+{% endblock %}

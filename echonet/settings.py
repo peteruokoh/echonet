@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -130,13 +131,14 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Folders Django will look in for static files
-STATICFILES_DIRS = [BASE_DIR / "static",]
+STATICFILES_DIRS = []
 
 MEDIA_URL = "/media/"
 # MEDIA_ROOT = BASE_DIR / "media"
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT = os.path.join(BASE_DIR, "media", "posts")
-LOGIN_URL = "/login/"          # if you later add auth
+LOGIN_URL = 'login'          
+# LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/post/"
 
 # Default primary key field type

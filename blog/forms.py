@@ -6,7 +6,17 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ["title", "body", "image", "video"]
         widgets = {
-            "title": forms.TextInput(attrs={'size': 40})
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter post title'
+            }),
+            'body': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4,
+                'placeholder': 'Write your post content...'
+            }),
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'video': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
 
 class CommentForm(forms.ModelForm):
@@ -14,5 +24,9 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ["body"]
         widgets = {
-            "body": forms.Textarea(attrs={"rows": 4, 'cols': 80, "placeholder": "Write a comment..."})
+            'body': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4,
+                'placeholder': 'Write your comment...'
+            }),
         }

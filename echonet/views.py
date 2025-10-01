@@ -14,7 +14,6 @@ def custom_login_view(request):
             return redirect('list_posts') 
     else:
         form = AuthenticationForm()
-
     return render(request, 'login.html', {'form': form})
 
 def homepage(request):
