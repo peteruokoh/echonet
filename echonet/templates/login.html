@@ -16,34 +16,36 @@
           <i class="fa-solid fa-arrow-left"></i> Back To All Posts
         </a>
 
-        <!-- Info message -->
-        <h6 class="text-danger mb-3">
-          You need to login to create, edit, delete, like or comment on a post
-        </h6>
-
-        <!-- Page title -->
-        <h1 class="page-title mb-4 text-center">Account Login</h1>
-
         <!-- Login form -->
-        <form method="post" novalidate>
-          {% csrf_token %}
-          {{ form.non_field_errors }}
+        <div class="p-4 border rounded bg-white shadow-sm">
+          <!-- Info message -->
+          <h6 class="text-danger mb-3">
+            You need to login to create, edit, delete, like or comment on a post
+          </h6>
 
-          <div class="mb-3">
-            {{ form.username.label_tag }}
-            {{ form.username|add_class:"form-control"|attr:"placeholder:Enter username" }}
-          </div>
+          <h2 class="page-title mb-4 text-center">Account Login</h2>
 
-          <div class="mb-3">
-            {{ form.password.label_tag }}
-            {{ form.password|add_class:"form-control"|attr:"placeholder:Enter password" }}
-          </div>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            <div style="color:crimson;">
+              {{ form.non_field_errors }}
+            </div>
+            <div class="mb-3">
+              {{ form.username.label_tag }}
+              {{ form.username|add_class:"form-control"|attr:"autofocus" }}
+            </div>
 
-          <!-- Make button consistent with Save button -->
-          <button data-analytics="" data-cta=""  type="submit" class="btn btn-primary d-block mx-auto">
-            <i class="fa-solid fa-right-to-bracket"></i> Login
-          </button>
-        </form>
+            <div class="mb-3">
+              {{ form.password.label_tag }}
+              {{ form.password|add_class:"form-control" }}
+            </div>
+
+            <!-- Make button consistent with Save button -->
+            <button data-analytics="" data-cta=""  type="submit" class="btn btn-primary d-block mx-auto">
+              <i class="fa-solid fa-right-to-bracket"></i> Login
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

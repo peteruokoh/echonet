@@ -19,6 +19,12 @@ class PostForm(forms.ModelForm):
             'video': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
 
+    # Override the form's __init__ method to add autofocus to the title input without losing existing attributes
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Add autofocus attribute to title field widget, preserving existing attrs
+        self.fields['title'].widget.attrs['autofocus'] = 'autofocus'
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment

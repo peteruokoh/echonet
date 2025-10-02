@@ -18,72 +18,79 @@
             <a data-analytics="" data-cta="" href="{% url 'list_posts' %}#post-{{ post.id }}" class="btn btn-link p-0 mb-3">
             <i class="fa-solid fa-arrow-left"></i> Back To All Posts
             </a>
+            
+            <div class="p-4 border rounded bg-white shadow-sm">
+                <!-- Post title -->
+                <h1 class="mb-2">{{ post.title }}</h1>
+                <span>Author: {{ post.author }}</span>&nbsp;&nbsp;&nbsp;
+                <span class="text-muted">{{ post.publishDate }}</span>
+                <br>
+                <br>
 
-            <!-- Post title -->
-            <h1 class="mb-2">{{ post.title }}</h1>
-            <span>Author: {{ post.author }}</span>&nbsp;&nbsp;&nbsp;
-            <span class="text-muted">{{ post.publishDate }}</span>
-            <br>
-            <br>
+                <!-- Post body -->
+                <p>{{ post.body }}</p>
 
-            <!-- Post body -->
-            <p>{{ post.body }}</p>
-
-            <!-- Media (image or video) -->
-            {% if post.image %}
-            <img src="{{ post.image.url }}" class="img-fluid mb-3" alt="Post Image">
-            {% endif %}
-
-            {% if post.video %}
-            <div class="ratio ratio-16x9 mb-3">
-                <video controls>
-                <source src="{{ post.video.url }}">
-                </video>
-            </div>
-            {% endif %}
-
-            <!-- Likes -->
-            <p><b>Likes:</b> {{ total_likes }}</p>
-            {% if user.is_authenticated %}
-            <form method="post" action="{% url 'toggle_like' post.id %}" class="mb-3">
-                {% csrf_token %}
-                <button data-analytics="" data-cta=""  type="submit" class="btn btn-outline-danger">
-                {% if is_liked %}
-                    <i class="fa-solid fa-dumpster-fire"></i> Unlike
-                {% else %}
-                    <i class="fa-solid fa-heart-circle-check"></i> Like
+                <!-- Media (image or video) -->
+                {% if post.image %}
+                <img src="{{ post.image.url }}" class="img-fluid mb-3" alt="Post Image">
                 {% endif %}
-                </button>
-            </form>
-            {% endif %}
 
-            <!-- Comments -->
-            <p class="mb-2" style="display: inline"><b>Comments:</b></p>&nbsp;<span>{{ post.total_comments }}</span>
-            <div class="bg-light pt-2 px-4 pb-4 rounded">
-                {% for comment in comments %}
-                    <div class="border-bottom mb-3 pb-2">
-                        <p class="fw-bold text-primary mb-1">{{ comment.user.username }}</p>
-                        <p class="mb-1">{{ comment.body }}</p>
-                        <p class="text-muted small mb-0">{{ comment.commentDate|date:"F j, Y, g:i a" }}</p>
-                    </div>
-                {% empty %}
-                    <p class="text-muted">No comments yet. Be the first to comment!</p>
-                {% endfor %}
+                {% if post.video %}
+                <div class="ratio ratio-16x9 mb-3">
+                    <video controls>
+                    <source src="{{ post.video.url }}">
+                    </video>
+                </div>
+                {% endif %}
+
+                <!-- Likes -->
+                <p><b>Likes:</b> {{ total_likes }}</p>
+                {% if user.is_authenticated %}
+                    {% if user != post.author %}
+                        <form method="post" action="{% url 'toggle_like' post.id %}" class="mb-3">
+                            {% csrf_token %}
+                            <button data-analytics="" data-cta=""  type="submit" class="btn btn-outline-danger">
+                            {% if is_liked %}
+                                <i class="fa-solid fa-dumpster-fire"></i> Unlike
+                            {% else %}
+                                <i class="fa-solid fa-heart-circle-check"></i> Like
+                            {% endif %}
+                            </button>
+                        </form>
+                    {% endif %}
+                {% endif %}
+
+                <!-- Comments -->
+                <p class="mb-2" style="display: inline"><b>Comments:</b></p>&nbsp;<span>{{ post.total_comments }}</span>
+                <div class="pt-2 px-4 pb-4 rounded">
+                    {% for comment in comments %}
+                        <div class="border-bottom mb-3 pb-2">
+                            <p class="fw-bold text-primary mb-1">{{ comment.user.username }}</p>
+                            <p class="mb-1">{{ comment.body }}</p>
+                            <p class="text-muted small mb-0">{{ comment.commentDate|date:"F j, Y, g:i a" }}</p>
+                        </div>
+                    {% empty %}
+                        <p class="text-muted">No comments yet.</p>
+                    {% endfor %}
+                </div>
+
+                <!-- Add Comment -->
+                {% if user.is_authenticated %}
+                    {% if user != post.author %}
+                        <form method="post" class="mt-3">
+                            {% csrf_token %}
+                            {{ comment_form.as_p }}
+                            <button data-analytics="" data-cta=""  type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-comment"></i> Add Comment
+                            </button>
+                        </form>
+                    {% else %}
+                        <p class="text-danger"><b>Authors are not permitted to like or comment on their own posts.</b></p>
+                    {% endif %}
+                {% else %}
+                    <p class="text-danger"><b>You must be logged in to like or comment on a post.</b></p>
+                {% endif %}
             </div>
-
-            <!-- Add Comment -->
-            {% if user.is_authenticated %}
-            <form method="post" class="mt-3">
-                {% csrf_token %}
-                {{ comment_form.as_p }}
-                <button data-analytics="" data-cta=""  type="submit" class="btn btn-primary">
-                <i class="fa-solid fa-comment"></i> Add Comment
-                </button>
-            </form>
-            {% else %}
-                <p class="text-danger"><b>You must be logged in to like or comment on a post.</b></p>
-            {% endif %}
-
         </div>
         </div>
     </div>

@@ -14,34 +14,36 @@
                         <i class="fa-solid fa-arrow-left"></i> Back To All Posts
                     </a>
 
-                    {% if form.instance.pk %}
-                        <h1 class="mb-4 text-center">Edit Post</h1>
-                    {% else %}
-                        <h1 class="mb-4 text-center">Create Post</h1>
-                    {% endif %}
+                    <div class="p-4 border rounded bg-white shadow-sm">
+                        {% if form.instance.pk %}
+                            <h2 class="mb-4 text-center">Edit Post</h2>
+                        {% else %}
+                            <h2 class="mb-4 text-center">Create Post</h2>
+                        {% endif %}
 
-                    <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
-                    {% csrf_token %}
+                        <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        {% csrf_token %}
 
-                    {% for field in form %}
-                        <div class="mb-3">
-                            <label for="{{ field.id_for_label }}" class="form-label">
-                                {{ field.label }}
-                            </label>
-                            {{ field }}
-                            {% if field.help_text %}
-                                <div class="form-text">{{ field.help_text }}</div>
-                            {% endif %}
-                            {% for error in field.errors %}
-                                <div class="text-danger small">{{ error }}</div>
-                            {% endfor %}
-                        </div>
-                    {% endfor %}
+                        {% for field in form %}
+                            <div class="mb-3">
+                                <label for="{{ field.id_for_label }}" class="form-label">
+                                    {{ field.label }}
+                                </label>
+                                {{ field }}
+                                {% if field.help_text %}
+                                    <div class="form-text">{{ field.help_text }}</div>
+                                {% endif %}
+                                {% for error in field.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
 
-                    <button data-analytics="" data-cta=""  type="submit" class="btn btn-primary d-block mx-auto">
-                        <i class="fa-solid fa-save"></i> Save
-                    </button>
-                    </form>
+                        <button data-analytics="" data-cta=""  type="submit" class="btn btn-primary d-block mx-auto">
+                            <i class="fa-solid fa-save"></i> Save
+                        </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -16,59 +16,60 @@
           <i class="fa-solid fa-arrow-left"></i> Back To All Posts
         </a>
 
-        <!-- Page title -->
-        <h1 class="page-title mb-4 text-center">Sign Up</h1>
+        <div class="p-4 border rounded bg-white shadow-sm">
+          <!-- Page title -->
+          <h2 class="page-title mb-4 text-center">Sign Up</h2>
 
-        <!-- Sign Up Form -->
-        <form method="post" novalidate>
-          {% csrf_token %}
+          <!-- Sign Up Form -->
+          <form method="post" novalidate>
+            {% csrf_token %}
 
-          <!-- Display form errors -->
-          {% if form.errors %}
-            <div class="alert alert-danger">
-              <ul class="mb-0">
-                {% for field in form %}
-                  {% for error in field.errors %}
-                    <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+            <!-- Display form errors -->
+            {% if form.errors %}
+              <div class="alert alert-danger">
+                <ul class="mb-0">
+                  {% for field in form %}
+                    {% for error in field.errors %}
+                      <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+                    {% endfor %}
                   {% endfor %}
-                {% endfor %}
-                {% for error in form.non_field_errors %}
-                  <li>{{ error }}</li>
-                {% endfor %}
-              </ul>
+                  {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+
+            <!-- Username -->
+            <div class="mb-3">
+              {{ form.username.label_tag }}
+              {{ form.username|add_class:"form-control" }}
             </div>
-          {% endif %}
 
-          <!-- Username -->
-          <div class="mb-3">
-            {{ form.username.label_tag }}
-            {{ form.username|add_class:"form-control"|attr:"placeholder:Enter username" }}
-          </div>
+            <!-- Email -->
+            <div class="mb-3">
+              {{ form.email.label_tag }}
+              {{ form.email|add_class:"form-control" }}
+            </div>
 
-          <!-- Email -->
-          <div class="mb-3">
-            {{ form.email.label_tag }}
-            {{ form.email|add_class:"form-control"|attr:"placeholder:Enter email" }}
-          </div>
+            <!-- Password -->
+            <div class="mb-3">
+              {{ form.password1.label_tag }}
+              {{ form.password1|add_class:"form-control" }}
+            </div>
 
-          <!-- Password -->
-          <div class="mb-3">
-            {{ form.password1.label_tag }}
-            {{ form.password1|add_class:"form-control"|attr:"placeholder:Enter password" }}
-          </div>
+            <!-- Confirm Password -->
+            <div class="mb-4">
+              {{ form.password2.label_tag }}
+              {{ form.password2|add_class:"form-control" }}
+            </div>
 
-          <!-- Confirm Password -->
-          <div class="mb-4">
-            {{ form.password2.label_tag }}
-            {{ form.password2|add_class:"form-control"|attr:"placeholder:Confirm password" }}
-          </div>
-
-          <!-- Submit -->
-          <button data-analytics="" data-cta=""  type="submit" class="btn btn-primary d-block mx-auto">
-            Sign Up
-          </button>
-        </form>
-
+            <!-- Submit -->
+            <button data-analytics="" data-cta=""  type="submit" class="btn btn-primary d-block mx-auto">
+              Sign Up
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
